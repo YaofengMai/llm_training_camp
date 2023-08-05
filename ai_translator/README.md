@@ -1,5 +1,5 @@
 # AI Translator 
-简介（TODO）
+最近在极客时间学习《AI 大模型应用开发实战营》，自己一边跟着学一边开发了一个进阶版本的 OpenAI-Translator。在这里简单记录下所支持的特性、设计要点和心得体会，供有兴趣的同学参考。
 
 # Feature list
 1. Rest服务化
