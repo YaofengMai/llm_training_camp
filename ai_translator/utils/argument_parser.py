@@ -13,6 +13,7 @@ class ArgumentParser:
         self.parser.add_argument('--book', type=str, help='PDF file to translate.')
         self.parser.add_argument('--file_format', type=str, help='The file format of translated book. Now supporting PDF and Markdown')
         self.parser.add_argument('--to_lan', type=str, help='The target language, Chinese, Spanish, e.g.')
+        self.parser.add_argument('--style', type=str, help='The style, artist, novel, computer language e.g.')
         self.parser.add_argument('--rest_port', type=int, help='The port for restful server, if not provided or 0, no restful interface will be launched')
 
     def parse_arguments(self):

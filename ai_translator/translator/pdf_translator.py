@@ -12,7 +12,7 @@ class PDFTranslator:
         self.pdf_parser = PDFParser()
         self.writer = Writer()
 
-    def translate_pdf(self, pdf_file, file_format: str = 'pdf', to_lan: str = 'Chinese', output_file_path: str = None, pages: Optional[int] = None):
+    def translate_pdf(self, pdf_file, file_format: str = 'pdf', to_lan: str = 'Chinese', style: str = 'plain', output_file_path: str = None, pages: Optional[int] = None):
         self.book = self.pdf_parser.parse_pdf(pdf_file, pages)
 
         for page_idx, page in enumerate(self.book.pages):
@@ -24,7 +24,7 @@ class PDFTranslator:
                     status = True
                     LOG.debug("Image so just reserve the image only")
                 else:
-                    messages = self.model.translate_messages(content, to_lan = to_lan)
+                    messages = self.model.translate_messages(content, to_lan = to_lan, style = style)
                     LOG.debug(messages)
                     translation, status = self.model.make_request(messages)
                     LOG.info(translation)

@@ -61,6 +61,7 @@ async def create_job():
 
     file_format = formdata['file_format']
     to_lan = formdata['to_lan']
+    style = formdata['style']
     translator = current_app.config.get("translator")
     
     if 'translator' not in current_app.config:
@@ -69,18 +70,18 @@ async def create_job():
 
     t = Thread(target=translate_book, name=f"job_{job_id}", 
            kwargs={'job_id': job_id, 'translator': translator, 'pdffile': pdffile,
-                   'file_format': file_format, 'to_lan':to_lan})
+                   'file_format': file_format, 'to_lan':to_lan, 'style': style})
     threads[t.ident] = t
     j = {"job_id": job_id, "status": "Started"}
     results[job_id] = j
     t.start()
     return j
     
-def translate_book(job_id, translator, pdffile, file_format, to_lan='Chinese'):
+def translate_book(job_id, translator, pdffile, file_format, to_lan='Chinese', style = 'plain'):
     LOG.info("Start translate")
     results[job_id]['status'] = 'InProgress'
     try:
-        buffer = translator.translate_pdf(pdffile, file_format, to_lan)
+        buffer = translator.translate_pdf(pdffile, file_format, to_lan, style)
         results[job_id]['status'] = 'Finished'
         translation[job_id] = {
             'filename': pdffile.filename.replace('.pdf', f'_{to_lan}.{file_format}'),

@@ -11,4 +11,5 @@ common:
   book: "<the book>"
   file_format: "pdf"
   to_lan: "Chinese"
+  style: "plain"
   rest_port: 5003

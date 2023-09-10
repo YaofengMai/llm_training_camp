@@ -22,6 +22,7 @@ if __name__ == "__main__":
 
 
     to_lan = args.to_lan if args.to_lan else config['common']['to_lan']
+    style = args.style if args.style else config['common']['style']
     pdf_file_path = args.book if args.book else config['common']['book']
     file_format = args.file_format if args.file_format else config['common']['file_format']
     rest_port = args.rest_port if args.rest_port else config['common']['rest_port']
@@ -30,7 +31,7 @@ if __name__ == "__main__":
     translator = PDFTranslator(model)
     print(rest_port)
     if rest_port == 0:
-        translator.translate_pdf(pdf_file_path, file_format, to_lan)
+        translator.translate_pdf(pdf_file_path, file_format, to_lan, style)
     else:
         app.config.update({'translator': translator})
         app.run(port=rest_port)
